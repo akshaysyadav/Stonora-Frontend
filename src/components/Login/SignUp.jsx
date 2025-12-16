@@ -1,164 +1,140 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import logo from "../../assets/stonora-logo.png";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Card from "../Card.jsx";
+import Button from "../Button.jsx";
 
-const navItems = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "How it works", href: "/how-it-works" },
-  { label: "Contact", isWhatsApp: true, phoneNumber: "+919890003000" },
-];
+export default function Signup() {
+  const navigate = useNavigate();
 
-export default function Navbar() {
-  const [open, setOpen] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userInitial, setUserInitial] = useState("");
-  const location = useLocation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [location, setLocation] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("currentUser"));
-    if (user && user.email) {
-      setIsAuthenticated(true);
-      setUserInitial(user.email.charAt(0).toUpperCase());
-    } else {
-      setIsAuthenticated(false);
-      setUserInitial("");
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const passwordRegex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?#&_])[A-Za-z\d@$!%*?#&_]{8,}$/;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+
+    if (!emailRegex.test(email)) {
+      setError("Enter a valid email");
+      return;
     }
-  }, [location]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("auth");
-    localStorage.removeItem("currentUser");
-    setIsAuthenticated(false);
-    setUserInitial("");
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be 8+ characters, include uppercase, lowercase, number, and special character"
+      );
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
+    if (!address.trim() || !location.trim()) {
+      setError("Address and location are required");
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    if (users.find((u) => u.email === email)) {
+      setError("Email already exists");
+      return;
+    }
+
+    users.push({
+      email,
+      password,
+      address,
+      location,
+      createdAt: new Date().toISOString(),
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+    alert("Signup successful! Please login.");
+    navigate("/login");
   };
 
-  const whatsappLink = (phone) => `https://wa.me/${phone}`;
-
-  const MenuItems = ({ isMobile }) => (
-    <>
-      {navItems.map(({ label, href, isWhatsApp, phoneNumber }) => {
-        const baseClasses =
-          "transition-colors duration-200 focus:outline-none focus-visible:ring-2";
-        const normalClasses = isMobile
-          ? "block text-white hover:text-richGold"
-          : "hover:text-richGold";
-
-        return (
-          <li key={label}>
-            {isWhatsApp ? (
-              <a
-                href={whatsappLink(phoneNumber)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${normalClasses} ${baseClasses}`}
-                onClick={() => isMobile && setOpen(false)}
-              >
-                {label}
-              </a>
-            ) : (
-              <Link
-                to={href}
-                className={`${normalClasses} ${baseClasses}`}
-                onClick={() => isMobile && setOpen(false)}
-              >
-                {label}
-              </Link>
-            )}
-          </li>
-        );
-      })}
-    </>
-  );
-
   return (
-    <nav className="sticky top-0 z-50 bg-deepForest text-white shadow-md">
-      <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Stonora Logo" className="h-10 md:h-12" />
-        </Link>
+    <div className="min-h-screen flex items-center justify-center bg-deepForest px-4">
+      <Card>
+        <h1 className="text-3xl font-bold text-center mb-6 text-black">
+          Sign Up
+        </h1>
 
-        {/* Mobile menu toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden focus-visible:ring-2 focus-visible:ring-richGold"
-        >
-          {open ? "✕" : "☰"}
-        </button>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            required
+          />
 
-        {/* Desktop menu */}
-        <ul className="hidden md:flex space-x-6 items-center">
-          <MenuItems isMobile={false} />
+          <textarea
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+            placeholder="Address"
+            rows={2}
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 resize-none"
+            required
+          />
 
-          {!isAuthenticated ? (
-            <Link
-              to="/signin"
-              className="bg-richGold text-deepForest px-3 py-1 rounded font-semibold"
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            placeholder="Location / Area (e.g. Andheri West)"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            required
+          />
+
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            required
+          />
+
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="Confirm Password"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              required
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-2 text-sm text-gray-500"
             >
-              Login
-            </Link>
-          ) : (
-            <div className="relative group">
-              <button className="w-10 h-10 rounded-full bg-richGold text-deepForest font-semibold">
-                {userInitial}
-              </button>
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
 
-              {/* Dropdown */}
-              <div className="absolute right-0 mt-2 w-40 bg-white text-deepForest rounded-xl shadow-lg opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 z-50">
-                <Link
-                  to="/profile"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                >
-                  Profile
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100"
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
-          )}
-        </ul>
-      </div>
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
-      {/* Mobile menu items */}
-      {open && (
-        <ul className="md:hidden space-y-3 px-4 pb-4">
-          <MenuItems isMobile={true} />
-
-          {!isAuthenticated ? (
-            <Link
-              to="/signin"
-              onClick={() => setOpen(false)}
-              className="block bg-richGold text-deepForest px-3 py-2 rounded font-semibold"
-            >
-              Login
-            </Link>
-          ) : (
-            <>
-              <Link
-                to="/profile"
-                onClick={() => setOpen(false)}
-                className="block text-white hover:text-richGold"
-              >
-                Profile
-              </Link>
-              <button
-                onClick={() => {
-                  handleLogout();
-                  setOpen(false);
-                }}
-                className="block text-white hover:text-richGold"
-              >
-                Logout
-              </button>
-            </>
-          )}
-        </ul>
-      )}
-    </nav>
+          <Button
+            type="submit"
+            text="Sign Up"
+            className="w-full bg-yellow-500 text-white hover:bg-yellow-600"
+          />
+        </form>
+      </Card>
+    </div>
   );
 }
