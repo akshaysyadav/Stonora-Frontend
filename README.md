@@ -5,7 +5,7 @@ It provides a clean UI/UX experience, optimized for performance, scalability, an
 
 ---
 
-## 🚀 Features
+## Features
 - Fast and responsive design
 - Tailwind CSS for styling
 - Secure authentication flow
@@ -14,15 +14,15 @@ It provides a clean UI/UX experience, optimized for performance, scalability, an
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ---
 
-## 🛠️ Installation & Setup
+##  Installation & Setup
 
 Clone the repository:
 ```bash
 git clone https://github.com/your-username/stonora-website.git
 cd stonora-website
 ```
-Live: stonora.vercel.app
+Live: https://stonora.vercel.app/
