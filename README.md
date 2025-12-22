@@ -24,3 +24,5 @@ Clone the repository:
 ```bash
 git clone https://github.com/your-username/stonora-website.git
 cd stonora-website
+```
+Live: stonora.vercel.app
