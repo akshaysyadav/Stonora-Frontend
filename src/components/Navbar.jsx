@@ -16,9 +16,11 @@ export default function Navbar() {
   const [userInitial, setUserInitial] = useState("");
   const location = useLocation();
 
+  const isActive = (path) => location.pathname === path;
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
-    if (user && user.email) {
+    if (user?.email) {
       setIsAuthenticated(true);
       setUserInitial(user.email.charAt(0).toUpperCase());
     } else {
@@ -42,7 +44,7 @@ export default function Navbar() {
         const baseClasses =
           "transition-colors duration-200 focus:outline-none focus-visible:ring-2";
         const normalClasses = isMobile
-          ? "block text-white hover:text-richGold"
+          ? "inline-block text-white hover:text-richGold"
           : "hover:text-richGold";
 
         return (
@@ -52,7 +54,7 @@ export default function Navbar() {
                 href={whatsappLink(phoneNumber)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${normalClasses} ${baseClasses}`}
+                className={`${baseClasses} ${normalClasses}`}
                 onClick={() => isMobile && setOpen(false)}
               >
                 {label}
@@ -60,7 +62,11 @@ export default function Navbar() {
             ) : (
               <Link
                 to={href}
-                className={`${normalClasses} ${baseClasses}`}
+                className={`${baseClasses} ${normalClasses} relative pb-1 ${
+                  isActive(href)
+                    ? "text-richGold border-b-2 border-richGold"
+                    : "border-b-2 border-transparent hover:border-richGold"
+                }`}
                 onClick={() => isMobile && setOpen(false)}
               >
                 {label}
@@ -73,21 +79,29 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="sticky top-0 z-50 bg-deepForest text-white shadow-md">
+    <nav className="sticky top-0 z-50 bg-deepForest text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Stonora Logo" className="h-10 md:h-12" />
         </Link>
 
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="md:hidden focus-visible:ring-2 focus-visible:ring-richGold"
-        >
-          {open ? "✕" : "☰"}
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          {!isAuthenticated && (
+            <Link
+              to="/signin"
+              className="bg-richGold text-deepForest px-3 py-1 rounded font-semibold text-sm"
+            >
+              Login
+            </Link>
+          )}
+          <button
+            onClick={() => setOpen(!open)}
+            className="text-xl focus-visible:ring-2 focus-visible:ring-richGold"
+          >
+            {open ? "✕" : "☰"}
+          </button>
+        </div>
 
-        {/* Desktop menu */}
         <ul className="hidden md:flex space-x-6 items-center">
           <MenuItems isMobile={false} />
 
@@ -103,8 +117,6 @@ export default function Navbar() {
               <button className="w-10 h-10 rounded-full bg-richGold text-deepForest font-semibold">
                 {userInitial}
               </button>
-
-              {/* Dropdown */}
               <div className="absolute right-0 mt-2 w-40 bg-white text-deepForest rounded-xl shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-200 z-50">
                 <Link
                   to="/profile"
@@ -124,20 +136,10 @@ export default function Navbar() {
         </ul>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <ul className="md:hidden space-y-3 px-4 pb-4">
+        <ul className="md:hidden space-y-4 px-4 pb-4">
           <MenuItems isMobile={true} />
-
-          {!isAuthenticated ? (
-            <Link
-              to="/signin"
-              onClick={() => setOpen(false)}
-              className="block bg-richGold text-deepForest px-3 py-2 rounded font-semibold"
-            >
-              Login
-            </Link>
-          ) : (
+          {isAuthenticated && (
             <>
               <Link
                 to="/profile"

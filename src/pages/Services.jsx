@@ -129,7 +129,7 @@ export default function Services() {
 
   return (
     <div className="bg-deepForest text-richGold">
-      {/* Our Services */}
+
       <section className="py-20 bg-richGold text-deepForest text-center">
         <h1 className="text-5xl font-bold mb-4">Our Services</h1>
         <p className="text-lg mb-6">
@@ -140,29 +140,27 @@ export default function Services() {
         </p>
       </section>
 
-      {/*Service Cards*/}
       <section className="py-20 px-4">
-        <div className="container mx-auto max-w-7xl text-center">
-          <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3">
+        <div className="container mx-auto max-w-7xl text-center ">
+          <div className="grid gap-12 sm:grid-cols-2 md:grid-cols-3 ">
             {services.map((service, idx) => (
               <article
                 key={idx}
-                className="flex flex-col justify-between bg-white rounded-2xl shadow-md border border-gray-200 p-6 h-full hover:shadow-lg transition"
+                className="flex flex-col justify-between bg-[#F5F2EC] rounded-2xl shadow-md border border-gray-200 p-6 h-full hover:shadow-lg transition text-[#2D2D2D]"
               >
-                {/* Top content */}
-                <div className="flex flex-col items-center gap-3 text-center">
-                  <div className="w-14 h-14 rounded-full bg-richGold text-white flex items-center justify-center">
+    
+                <div className="flex flex-col items-center gap-3 text-center ">
+                  <div className="w-14 h-14 rounded-full bg-richGold text-[#2D2D2D] flex items-center justify-center">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-deepForest">
+                  <h3 className="text-lg font-semibold text-[#2D2D2D]">
                     {service.title}
                   </h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">
+                  <p className="text-sm text-[#2D2D2D] leading-relaxed">
                     {service.description}
                   </p>
                 </div>
 
-                {/* Points */}
                 <ul className="space-y-2 pt-3 text-left">
                   {service.points.map((point, i) => (
                     <li
@@ -188,7 +186,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Savings Comparison */}
+
       <section className="py-20 px-4 text-center bg-gradient-to-b from-deepForest to-deepForest/90">
         <h2 className="text-4xl font-bold mb-3">See How Much You Save</h2>
         <p className="mb-10">Compare our prices with typical market rates</p>
@@ -225,7 +223,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* FAQs */}
+    
       <section className="py-20 px-4">
         <h2 className="text-4xl font-bold text-center mb-3">
           Frequently Asked Questions

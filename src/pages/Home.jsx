@@ -55,7 +55,7 @@ export default function Home() {
           <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold leading-tight">
             All your home{" "}
             <span className="text-richGold block lg:inline">services </span>
-            <br className="sm:hidden" />
+            
             <span className="block lg:inline"> in one place</span>
           </h1>
           <p className="text-gray-300 max-w-md mx-auto lg:mx-0 text-sm sm:text-base lg:text-lg">

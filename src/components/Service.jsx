@@ -54,26 +54,25 @@ const ServiceCard = ({ title, description, icon }) => {
 
   return (
     <article
-      className="flex flex-col items-center justify-between bg-white rounded-xl shadow-lg border border-gray-100 p-8 min-h-[280px] hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
+      className="flex flex-col items-center justify-between bg-[#F5F2EC] rounded-xl shadow-lg border border-gray-100 p-8 min-h-[280px] hover:shadow-2xl transition-shadow duration-300 cursor-pointer"
       tabIndex={0}
       aria-label={`${title} service card`}
     >
       <div className="flex flex-col items-center">
         <div
-          className="flex items-center justify-center w-16 h-16 rounded-full bg-richGold text-white mb-6 text-3xl"
+          className="flex items-center justify-center w-16 h-16 rounded-full bg-richGold text-[#2D2D2D] mb-6 text-3xl"
           aria-hidden="true"
         >
           {icon}
         </div>
-        <h3 className="text-2xl font-semibold text-deepForest mb-2 font-poppins">
+        <h3 className="text-2xl font-semibold text-[#2D2D2D] mb-2 font-poppins">
           {title}
         </h3>
-        <p className="text-lg text-gray-600 text-center font-inter leading-relaxed">
+        <p className="text-lg text-[#2D2D2D] text-center font-inter leading-relaxed">
           {description}
         </p>
       </div>
 
-      {/* Add top margin to increase gap */}
       <div className="mt-8 w-full">
         <Button text="Get Started" onClick={handleGetStarted} />
       </div>

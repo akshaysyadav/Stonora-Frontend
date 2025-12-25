@@ -69,7 +69,7 @@ export default function HowItWorks() {
 
   return (
     <div className="bg-deepForest text-white min-h-screen py-24 px-6">
-      {/* Hero */}
+      
       <div className="max-w-2xl mx-auto text-center mb-32">
         <h1 className="text-6xl md:text-8xl font-black bg-gradient-to-r from-richGold via-yellow-400 to-richGold bg-clip-text text-transparent leading-tight tracking-[-0.05em]">
           How It Works
@@ -79,7 +79,7 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      {/* Steps - Single Line */}
+      
       <div className="max-w-4xl mx-auto mb-32 relative">
         <div className="flex items-start justify-between gap-12 md:gap-20">
           {steps.map((step, i) => (
@@ -102,7 +102,7 @@ export default function HowItWorks() {
         </div>
       </div>
 
-      {/* Offers - Floating Tags */}
+      
       <div className="max-w-5xl mx-auto mb-32">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-richGold to-yellow-400 bg-clip-text text-transparent tracking-tight">
@@ -139,7 +139,6 @@ export default function HowItWorks() {
         </div>
       </div>
 
-      {/* CTA*/}
       <div className="max-w-md mx-auto text-center">
         <FaClock className="w-16 h-16 text-richGold/40 mx-auto mb-8" />
         <h2 className="text-3xl font-black mb-6 text-white">Ready to start?</h2>

@@ -57,11 +57,20 @@ export default function AboutUs() {
       role: "Working Professional, Mumbai",
     },
   ];
+  const Stat = ({ value, label, color }) => (
+    <div className="text-center">
+      <div className="text-2xl sm:text-3xl font-bold" style={{ color }}>
+        {value}
+      </div>
+      <div className="text-xs sm:text-sm text-[#F5F2EC]/70 mt-1">
+        {label}
+      </div>
+    </div>
+  );
 
   return (
     <div className="font-poppins text-[#D59E43] leading-relaxed">
-      {/* HERO */}
-      <section className="bg-[#D59E43] text-[#0C3024] py-20 text-center">
+      <section className="bg-[#D59E43] text-[#0C3024] py-20 text-center ">
         <h1 className="text-4xl font-bold">About Stonora</h1>
         <p className="mt-4 max-w-2xl mx-auto text-lg">
           Making home services accessible, affordable, and hassle-free — for
@@ -69,7 +78,6 @@ export default function AboutUs() {
         </p>
       </section>
 
-      {/* STATS */}
       <section className="bg-[#0C3024] py-16">
         <div className="max-w-6xl mx-auto grid sm:grid-cols-2 md:grid-cols-4 gap-10 text-center">
           {stats.map(({ icon: Icon, value, label }, i) => (
@@ -82,51 +90,81 @@ export default function AboutUs() {
         </div>
       </section>
 
-      {/* STORY */}
-      <section className="bg-[#00251a] py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-8">Our Story</h2>
 
-        <div className="max-w-3xl mx-auto space-y-4 text-[#D59E43] text-justify">
-          <p>
-            Stonora was created because home services shouldn’t be complicated,
-            expensive, or time-consuming.
-          </p>
-          <p>
-            Our founders envisioned a single platform offering essential
-            services at transparent, affordable prices.
-          </p>
-          <p>
-            Today, we serve thousands across major cities, delivering everything
-            from pest control to fast on-call repairs in under 30 minutes.
-          </p>
-          <p className="font-semibold">
-            Save time. Save money. Live stress-free.
-          </p>
-        </div>
-      </section>
+      <section className="bg-[#0C3024] min-h-screen flex items-center px-4 sm:px-6 py-16">
+  <div className="max-w-7xl w-full mx-auto">
+    <div
+      className="border border-[#D59E43]/60 rounded-3xl
+                 px-6 sm:px-10 md:px-20
+                 py-16 sm:py-20 md:py-28"
+    >
+      <div className="text-center mb-14">
+        <h2 className="text-3xl sm:text-4xl md:text-6xl
+                       font-semibold text-[#D59E43] mb-4">
+          Our Story
+        </h2>
+        <div className="w-20 h-[2px] bg-[#D59E43] mx-auto"></div>
+      </div>
 
-      {/* VALUES */}
-      <section className="bg-[#00251a] py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold">Our Values</h2>
-        <p className="opacity-80 mt-2">
-          The principles that guide everything we do
-        </p>
-
-        <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-6 mt-10">
-          {values.map(({ icon: Icon, title, desc }, i) => (
-            <div
-              key={i}
-              className="border border-[#D59E43] rounded-2xl p-8 text-left hover:bg-[#0C3024] transition-colors"
+      <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        {[
+          {
+            title: "The Vision",
+            text: "Stonora was created to simplify home services that had become expensive, fragmented, and unreliable.",
+            color: "#D59E43",
+          },
+          {
+            title: "The Belief",
+            text: "Finding trusted professionals should be effortless, transparent, and fast — without hidden costs.",
+            color: "#E69138",
+          },
+          {
+            title: "The Solution",
+            text: "A single platform connecting customers with verified experts, exactly when they’re needed.",
+            color: "#D59E43",
+          },
+          {
+            title: "Today",
+            text: "Serving thousands across major cities with rapid-response services under 30 minutes.",
+            color: "#E69138",
+          },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="rounded-2xl border border-[#D59E43]/30
+                       bg-[#00251a]/60
+                       px-6 py-6 sm:py-7"
+          >
+            <h3
+              className="font-semibold text-lg sm:text-xl mb-3"
+              style={{ color: item.color }}
             >
-              <Icon size={40} className="text-[#D59E43]" />
-              <h3 className="text-2xl font-semibold mt-4">{title}</h3>
-              <p className="opacity-80 mt-2">{desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+              {item.title}
+            </h3>
+            <p className="text-[#F5F2EC]/80 text-sm sm:text-base leading-relaxed">
+              {item.text}
+            </p>
+          </div>
+        ))}
+      </div>
 
-      {/* TESTIMONIALS */}
+      <div className="grid grid-cols-3 gap-6 mt-16 pt-8 border-t border-[#D59E43]/30 max-w-4xl mx-auto">
+        <Stat value="30 min" label="Response Time" color="#D59E43" />
+        <Stat value="1000+" label="Customers" color="#E69138" />
+        <Stat value="100%" label="Verified Experts" color="#D59E43" />
+      </div>
+
+      <div className="mt-12 text-center">
+        <p className="text-[#E69138] text-lg sm:text-xl font-medium">
+          Save time. Save money. Live stress-free.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
       <section className="bg-[#00251a] py-20 px-6 text-center">
         <h2 className="text-4xl font-bold">What Our Customers Say</h2>
         <p className="opacity-80 mt-2">Don't just take our word for it</p>
