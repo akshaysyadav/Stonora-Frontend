@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Brand font override (optional, import from public/index.html or via npm as needed) */
+body {
+  font-family: "Poppins", "Inter", sans-serif;
+  background: linear-gradient(135deg, #cfd9df 0%, #f4e2d8 100%);
+  color: #0c3024;
+}
+
+/* Example luxury divider style */
+.luxury-divider {
+  border-top: 2px dashed #d59e43;
+  width: 60px;
+  margin: 20px auto;
+}
