@@ -99,7 +99,7 @@ export default function Home() {
                 fetchPriority={i === current ? "high" : "auto"}
                 className="w-full h-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-[#EFE0CD] p-4 sm:p-6 md:p-8">
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/70 to-transparent p-4 sm:p-6 md:p-8">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white truncate">
