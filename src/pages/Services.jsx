@@ -146,7 +146,7 @@ export default function Services() {
             {services.map((service, idx) => (
               <article
                 key={idx}
-                className="flex flex-col justify-between bg-[#F5F2EC] rounded-2xl shadow-md border border-gray-200 p-6 h-full hover:shadow-lg transition text-[#2D2D2D]"
+                className="flex flex-col justify-between bg-[#EFE0CD] rounded-2xl shadow-md border border-gray-200 p-6 h-full hover:shadow-lg transition text-[#2D2D2D]"
               >
     
                 <div className="flex flex-col items-center gap-3 text-center ">

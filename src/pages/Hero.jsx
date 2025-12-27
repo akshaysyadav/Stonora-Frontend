@@ -41,7 +41,7 @@ const ReasonCard = ({ icon, problem, solution }) => {
     <div
       className="
         h-full rounded-3xl p-8
-        bg-[#F5F2EC]
+        bg-[#EFE0CD]
         shadow-lg
         flex flex-col items-center text-center
         transition-all duration-300
